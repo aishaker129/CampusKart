@@ -26,13 +26,13 @@ public class User {
     @Column(nullable = false)
     @Size(message = "min length 6")
     private String password;
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    private boolean verified;
-    @Lob
+    private boolean verified=false;
+    @Column(columnDefinition = "TEXT")
     private String imageUrl;
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String imagePublicId;
 
     @Enumerated(EnumType.STRING)

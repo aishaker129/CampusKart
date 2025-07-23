@@ -39,7 +39,7 @@ public class AuthServiceImple implements AuthService{
         User user = new User();
         user.setName(registerRequest.getName());
         user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(Role.USER);
         userRepo.save(user);
         return "User registered successfully !!";
