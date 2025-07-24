@@ -1,16 +1,20 @@
 package com.campusKart.auth.entity;
 
 
+import com.campusKart.entity.Product;
+import com.campusKart.entity.Rating;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "Student")
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,24 +23,26 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+    @Email
+    @Column(unique = true)
     private String email;
-    @Column(nullable = false)
-    @Size(message = "min length 6")
     private String password;
-    @Column(columnDefinition = "TEXT")
     private String description;
-
+    private String university;
     private boolean verified=false;
-    @Column(columnDefinition = "TEXT")
     private String imageUrl;
-    @Column(columnDefinition = "TEXT")
     private String imagePublicId;
-
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "postedBy", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "toUser", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Rating> receivedRatings = new ArrayList<>();
 
 
 }
