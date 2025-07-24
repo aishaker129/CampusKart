@@ -1,10 +1,15 @@
-import React from 'react';
+import Hero from '../components/Home/Hero';
+import FeaturedItem from '../components/Home/FeaturedItem';
+import Categories from '../components/Home/Categories';
+import Testimonial from '../components/Home/Testimonial';
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Welcome to CampusKart</h1>
-      <p>Buy, sell, or donate items within your university campus.</p>
+    <div className='px-40 flex flex-1 justify-center py-5 layout-container  h-full grow flex-col'>
+      <Hero />
+      <FeaturedItem />
+      <Categories />
+      <Testimonial />
     </div>
   );
 }
