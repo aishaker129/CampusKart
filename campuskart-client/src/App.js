@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import BrowseListings from './pages/BrowseListings';
+import ProductListings from './pages/ProductListings';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -14,7 +14,7 @@ export default function App() {
         <main className="flex-1 p-4">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/browse" element={<BrowseListings />} />
+            <Route path="/products" element={<ProductListings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

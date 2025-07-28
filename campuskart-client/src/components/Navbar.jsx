@@ -19,10 +19,10 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-9">
 
-          <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/sell">Sell</Link>
+          {/* <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/sell">Sell</Link>
           <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/donate">Donate</Link>
-          <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/buy">Buy</Link>
-          <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/browse">Swap</Link>
+          <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/buy">Buy</Link> */}
+          <Link className="text-[#0e141b] text-sm font-medium leading-normal" to="/products">Products</Link>
         </div>
       </div>
       <div className="flex flex-1 justify-end gap-8">
