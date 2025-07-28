@@ -40,6 +40,6 @@ public class Product {
     @JoinColumn(name = "user_id")
     private User postedBy;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
-    private List<SwapRequest> swapRequests;
+//    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+//    private List<SwapRequest> swapRequests;
 }

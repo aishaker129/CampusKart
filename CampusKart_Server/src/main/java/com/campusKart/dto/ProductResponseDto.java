@@ -4,13 +4,17 @@ import com.campusKart.auth.entity.User;
 import com.campusKart.entity.Enum.ProductCategory;
 import com.campusKart.entity.Enum.ProductType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductResponseDto {
     private Long id;
     private String title;
@@ -23,5 +27,5 @@ public class ProductResponseDto {
     private ProductCategory productCategory;
     private ProductType productType;
     private LocalDateTime createdAt;
-    private User postedBy;
+    private String postedBy;
 }
