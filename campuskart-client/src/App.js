@@ -5,6 +5,9 @@ import ProductListings from './pages/ProductListings';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import UserSignin from './components/Auth/UserSignin';
+import UserSignup from './components/Auth/UserSignup';
+import ForgetPassword from './components/Auth/ForgetPassword';
 
 export default function App() {
   return (
@@ -16,6 +19,9 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductListings />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/signin" element={<UserSignin />} />
+            <Route path="/signup" element={<UserSignup />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
           </Routes>
         </main>
         <Footer />

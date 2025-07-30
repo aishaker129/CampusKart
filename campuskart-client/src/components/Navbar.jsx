@@ -51,7 +51,7 @@ export default function Navbar() {
           className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1873dc] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
         >
           <span className="truncate">
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/signin">Sign In</Link>
           </span>
         </button>
       </div>
