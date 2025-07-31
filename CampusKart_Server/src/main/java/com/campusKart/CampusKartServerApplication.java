@@ -12,6 +12,10 @@ public class CampusKartServerApplication {
 		System.setProperty("DB_URL", dotenv.get("DB_URL"));
 		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
 		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+		System.setProperty("CLOUDINARY_NAME", dotenv.get("CLOUDINARY_NAME"));
+		System.setProperty("CLOUDINARY_KEY", dotenv.get("CLOUDINARY_KEY"));
+		System.setProperty("CLOUDINARY_SECRET", dotenv.get("CLOUDINARY_SECRET"));
+
 
 		SpringApplication.run(CampusKartServerApplication.class, args);
 

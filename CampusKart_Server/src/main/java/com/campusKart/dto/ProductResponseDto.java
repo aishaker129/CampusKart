@@ -21,7 +21,6 @@ public class ProductResponseDto {
     private String description;
     private double price;
     private String imageUrl;
-    private String imagePublicId;
     private boolean sold;
     private String condition;
     private ProductCategory productCategory;
