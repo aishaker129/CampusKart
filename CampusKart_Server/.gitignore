@@ -1,12 +1,14 @@
-HELP.md
+# Build output
 target/
+build/
+
+# Environment file
+.env
+
+# Maven wrapper JAR
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
-*.env
-
-### STS ###
+# Spring Tool Suite / Eclipse
 .apt_generated
 .classpath
 .factorypath
@@ -15,22 +17,25 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+# IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-
-### VS Code ###
+# VS Code
 .vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
