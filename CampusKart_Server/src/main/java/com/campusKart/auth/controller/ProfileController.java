@@ -1,15 +1,15 @@
 package com.campusKart.auth.controller;
 
 import com.campusKart.auth.dto.ProfileRequest;
-import com.campusKart.auth.entity.User;
+import com.campusKart.auth.dto.UserDto;
 import com.campusKart.auth.service.ProfileService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -20,6 +20,11 @@ public class ProfileController {
     public ProfileController(ProfileService profileService, ObjectMapper objectMapper) {
         this.profileService = profileService;
         this.objectMapper = objectMapper;
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return ResponseEntity.ok(profileService.getAllUsers());
     }
 
     @PutMapping("/{id}/update-profile")

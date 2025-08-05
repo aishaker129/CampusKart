@@ -1,6 +1,8 @@
 package com.campusKart.auth.service;
 
+import com.campusKart.auth.Mapper.UserMapper;
 import com.campusKart.auth.dto.ProfileRequest;
+import com.campusKart.auth.dto.UserDto;
 import com.campusKart.auth.entity.User;
 import com.campusKart.auth.repository.UserRepo;
 import com.cloudinary.Cloudinary;
@@ -9,17 +11,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfileService {
 
     private UserRepo userRepo;
     private Cloudinary cloudinary;
+    private UserMapper userMapper;
 
     public ProfileService(UserRepo userRepo, Cloudinary cloudinary) {
         this.userRepo = userRepo;
         this.cloudinary = cloudinary;
+    }
+    public List<UserDto> getAllUsers() {
+        return userRepo.findAll()
+                .stream()
+                .map(userMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     public String updateProfile(Long id, MultipartFile file, ProfileRequest user) throws IOException {
