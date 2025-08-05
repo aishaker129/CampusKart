@@ -15,8 +15,8 @@ public class CrossConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                                "", // ✅ allow local frontend dev
-                                "" // ✅ replace with actual frontend domain
+                                "http://localhost:4200", // ✅ allow local frontend dev
+                                "https://campuskartbd.vercel.app/" // ✅ replace with actual frontend domain
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
