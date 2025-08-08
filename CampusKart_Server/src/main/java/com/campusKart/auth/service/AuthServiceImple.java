@@ -6,13 +6,15 @@ import com.campusKart.auth.dto.RegisterRequest;
 import com.campusKart.auth.entity.Role;
 import com.campusKart.auth.entity.User;
 import com.campusKart.auth.repository.UserRepo;
-import lombok.RequiredArgsConstructor;
+import com.campusKart.exception.UserAlreadyExistsException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AuthServiceImple implements AuthService{
@@ -33,7 +35,8 @@ public class AuthServiceImple implements AuthService{
     @Override
     public String register(RegisterRequest registerRequest) {
         if(userRepo.findByEmail(registerRequest.getEmail()).isPresent()){
-            throw new RuntimeException("Email alredy registered !!");
+            return "Email already exists";
+//            throw new UserAlreadyExistsException("Email alredy registered !!");
         }
 
         User user = new User();
@@ -42,6 +45,7 @@ public class AuthServiceImple implements AuthService{
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(Role.USER);
         userRepo.save(user);
+
         return "User registered successfully !!";
     }
 
