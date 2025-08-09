@@ -35,7 +35,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // ✅ allow public access to log in, register
-                        .requestMatchers("/api/auth/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/user/**").hasAnyRole("ADMIN","USER")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e->e

@@ -22,9 +22,10 @@ public class ProfileService {
     private Cloudinary cloudinary;
     private UserMapper userMapper;
 
-    public ProfileService(UserRepo userRepo, Cloudinary cloudinary) {
+    public ProfileService(UserRepo userRepo, Cloudinary cloudinary, UserMapper userMapper) {
         this.userRepo = userRepo;
         this.cloudinary = cloudinary;
+        this.userMapper = userMapper;
     }
     public List<UserDto> getAllUsers() {
         return userRepo.findAll()

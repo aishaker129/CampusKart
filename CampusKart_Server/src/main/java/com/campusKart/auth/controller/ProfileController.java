@@ -22,10 +22,6 @@ public class ProfileController {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/view")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        return ResponseEntity.ok(profileService.getAllUsers());
-    }
 
     @PutMapping("/{id}/update-profile")
     public ResponseEntity<?> updateProfile(@PathVariable("id") Long id, @RequestParam("user") String userJson, @RequestParam("image") MultipartFile file) throws IOException {

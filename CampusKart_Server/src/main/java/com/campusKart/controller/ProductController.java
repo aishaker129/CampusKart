@@ -1,14 +1,11 @@
 package com.campusKart.controller;
 
 import com.campusKart.Services.ProductService;
-import com.campusKart.auth.service.AuthService;
 import com.campusKart.dto.ProductRequestDto;
 import com.campusKart.dto.ProductResponseDto;
-import com.campusKart.entity.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,5 +36,39 @@ public class ProductController {
         ProductRequestDto productDto = objectMapper.readValue(ProductJson, ProductRequestDto.class);
        return ResponseEntity.ok(productService.createProduct(productDto,principal.getName(),file));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) throws IOException {
+        ProductResponseDto productResponseDto = productService.getProductById(id);
+        return ResponseEntity.ok(productResponseDto);
+    }
+
+    @GetMapping("/my-product")
+    public ResponseEntity<List<ProductResponseDto>> getProductByUser(Authentication authentication) throws IOException {
+        String email = authentication.getName();
+        return ResponseEntity.ok(productService.getProductByUser(email));
+    }
+
+    @PutMapping("/update-product/{id}")
+    public ResponseEntity<ProductResponseDto> updateProduct(@PathVariable Long id, @RequestParam("product") String ProductJson,@RequestParam("image") MultipartFile file) throws IOException {
+        ProductRequestDto productDto = objectMapper.readValue(ProductJson, ProductRequestDto.class);
+        return ResponseEntity.ok(productService.updateProductById(id,productDto,file));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) throws IOException {
+        return ResponseEntity.ok(productService.deleteProductById(id));
+    }
+
+    @GetMapping("/price-range")
+    public ResponseEntity<List<ProductResponseDto>> getPriceRange(@RequestParam Double min, @RequestParam Double max) {
+        return ResponseEntity.ok(productService.getProductByPriceRange(min,max));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponseDto>> getProductBySearch(@RequestParam String keyword) {
+        return ResponseEntity.ok(productService.getProductByKeyword(keyword));
+    }
+
 }
 
