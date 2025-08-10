@@ -9,6 +9,10 @@ import com.campusKart.mapper.ProductMapper;
 import com.campusKart.repository.ProductRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +38,7 @@ public class ProductService {
         this.cloudinary = cloudinary;
     }
 
-    public List<ProductResponseDto> findAll() {
+    public List<ProductResponseDto> findAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(productMapper::toDto).collect(Collectors.toList());
     }
@@ -96,6 +100,17 @@ public class ProductService {
     public List<ProductResponseDto> getProductByKeyword(String keyword) {
         List<Product> products = productRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword,keyword);
         return products.stream().map(productMapper::toDto).collect(Collectors.toList());
+    }
+
+    public Page<ProductResponseDto> getProducts(int page,int size,String sort,String direction) {
+        Sort sortBy = direction.equalsIgnoreCase("desc")
+                ? Sort.by(sort).descending()
+                : Sort.by(sort).ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sortBy);
+        Page<Product> productPage = productRepository.findAll(pageable);
+
+        return productPage.map(productMapper::toDto);
     }
 
 }

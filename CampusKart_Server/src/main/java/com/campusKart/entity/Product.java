@@ -27,6 +27,7 @@ public class Product {
     private String imagePublicId;
     private boolean sold;
     private String condition;
+    private String stock;
 
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;

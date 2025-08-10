@@ -4,6 +4,7 @@ import com.campusKart.Services.ProductService;
 import com.campusKart.dto.ProductRequestDto;
 import com.campusKart.dto.ProductResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     private ProductService productService;
@@ -26,8 +27,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> findAll() {
-        List<ProductResponseDto> productResponseDto = productService.findAll();
+    public ResponseEntity<List<ProductResponseDto>> findAllProduct() {
+        List<ProductResponseDto> productResponseDto = productService.findAllProducts();
         return ResponseEntity.ok(productResponseDto);
     }
 
@@ -68,6 +69,16 @@ public class ProductController {
     @GetMapping("/search")
     public ResponseEntity<List<ProductResponseDto>> getProductBySearch(@RequestParam String keyword) {
         return ResponseEntity.ok(productService.getProductByKeyword(keyword));
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<ProductResponseDto>> getAllProductsPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "createdAt") String sortBy,
+            @RequestParam(defaultValue = "desc") String direction
+    ) {
+        return ResponseEntity.ok(productService.getProducts(page,size,sortBy,direction));
     }
 
 }
