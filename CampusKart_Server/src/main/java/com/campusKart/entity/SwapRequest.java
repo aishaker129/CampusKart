@@ -1,6 +1,7 @@
 package com.campusKart.entity;
 
 import com.campusKart.auth.entity.User;
+import com.campusKart.entity.Enum.RequestStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,9 @@ public class SwapRequest {
     private Product product;
     @ManyToOne
     private User user;
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status = RequestStatus.PENDING;
+
     private String offeredItemDescription;
     private LocalDateTime requestDate;
     private boolean accepted;

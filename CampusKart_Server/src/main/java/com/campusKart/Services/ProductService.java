@@ -9,6 +9,7 @@ import com.campusKart.mapper.ProductMapper;
 import com.campusKart.repository.ProductRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,13 +29,15 @@ public class ProductService {
     private ProductMapper productMapper;
     private UserRepo userRepo;
     private Cloudinary cloudinary;
+    private ApplicationEventPublisher applicationEventPublisher;
 
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper, UserRepo userRepo, Cloudinary cloudinary) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper, UserRepo userRepo, Cloudinary cloudinary, ApplicationEventPublisher applicationEventPublisher) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.userRepo = userRepo;
         this.cloudinary = cloudinary;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     public List<ProductResponseDto> findAllProducts() {
@@ -112,5 +114,13 @@ public class ProductService {
 
         return productPage.map(productMapper::toDto);
     }
+
+    // owner check helper (re-uses your getCurrentUserId())
+//    public void assertOwner(Long productId, Long userId) {
+//        Product product = productRepository.findById(productId).orElseThrow(()-> new RuntimeException("Product not found"));
+//        if(!product.getPostedBy().getId().equals(userId)){
+//            throw new AccessDeniedException("Access denied");
+//        }
+//    }
 
 }

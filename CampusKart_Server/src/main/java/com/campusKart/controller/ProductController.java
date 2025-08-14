@@ -1,18 +1,24 @@
 package com.campusKart.controller;
 
 import com.campusKart.Services.ProductService;
+import com.campusKart.auth.service.AuthService;
 import com.campusKart.dto.ProductRequestDto;
 import com.campusKart.dto.ProductResponseDto;
+import com.campusKart.entity.Enum.ProductStatus;
+import com.campusKart.entity.Product;
+import com.campusKart.repository.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -20,6 +26,8 @@ public class ProductController {
 
     private ProductService productService;
     private ObjectMapper objectMapper;
+    private ProductRepository productRepository;
+
 
     public ProductController(ProductService productService, ObjectMapper objectMapper) {
         this.productService = productService;
@@ -80,6 +88,17 @@ public class ProductController {
     ) {
         return ResponseEntity.ok(productService.getProducts(page,size,sortBy,direction));
     }
+
+//    @PatchMapping("/{id}/status")
+//    public ResponseEntity<ProductResponseDto> changeStatus(@PathVariable Long id, @RequestBody Map<String,String> newStatus) throws IOException {
+//        String status = newStatus.get("status");
+//        ProductStatus updatedStatus = ProductStatus.valueOf(status);
+//        Product product = productRepository.findById(id).orElseThrow(()-> new RuntimeException("Product not found"));
+//        Long currentUserId = product.getPostedBy().getId();
+//        boolean isAdmin = product.getPostedBy().getRole().equals("ADMIN");
+//        ProductResponseDto productResponseDto = productService.changeStatus(id,updatedStatus,currentUserId,isAdmin);
+//        return ResponseEntity.ok(productResponseDto);
+//    }
 
 }
 

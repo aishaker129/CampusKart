@@ -2,6 +2,7 @@ package com.campusKart.dto;
 
 import com.campusKart.auth.entity.User;
 import com.campusKart.entity.Enum.ProductCategory;
+import com.campusKart.entity.Enum.ProductStatus;
 import com.campusKart.entity.Enum.ProductType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class ProductResponseDto {
     private String condition;
     private ProductCategory productCategory;
     private ProductType productType;
+    private ProductStatus status;
     private LocalDateTime createdAt;
     private String postedBy;
 }

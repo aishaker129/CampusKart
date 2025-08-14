@@ -2,6 +2,7 @@ package com.campusKart.entity;
 
 import com.campusKart.auth.entity.User;
 import com.campusKart.entity.Enum.ProductCategory;
+import com.campusKart.entity.Enum.ProductStatus;
 import com.campusKart.entity.Enum.ProductType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,15 @@ public class Product {
     private String imagePublicId;
     private boolean sold;
     private String condition;
-    private String stock;
+    private int stock;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ProductStatus status = ProductStatus.AVAILABLE;
+
+    @Version
+    private Long version; // optimistic locking
 
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
